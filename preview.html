@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CareLog — Mobile Landing Preview</title>
+  <style>
+    :root {
+      --cream: #fbf6ee;
+      --cream-deep: #fbf3e9;
+      --ink: #2d2926;
+      --ink-soft: #2b2623;
+      --brand-green: #2e915e;
+      --brand-green-deep: #216e46;
+      --accent-gold: #e9b351;
+      --action-top: #c27353;
+      --action-bottom: #a85e42;
+      --shadow-card: 0 18px 20px rgba(40,31,26,0.08);
+      --shadow-overlay: 0 4px 40px rgba(0,0,0,0.25);
+      --shadow-header: 0 8px 20px rgba(31,23,18,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: "Outfit", system-ui, -apple-system, sans-serif; background: var(--cream); color: var(--ink); }
+    h1, h2, h3, h4 { font-family: "Lora", "Georgia", serif; margin: 0; }
+    p { margin: 0; }
+    img { display: block; max-width: 100%; }
+
+    .page { min-height: 100vh; background: var(--cream); }
+    .container { width: 100%; max-width: 420px; margin: 0 auto; }
+
+    .sticky-header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(6px);
+      background: rgba(247,242,233,0.86);
+      border-bottom: 1px solid rgba(43,38,35,0.12);
+      transition: height 150ms ease, box-shadow 150ms ease;
+      height: 72px;
+    }
+    .sticky-header.scrolled { height: 64px; box-shadow: var(--shadow-header); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 16px; height: 100%; }
+    .brand { display: flex; align-items: center; gap: 8px; }
+    .brand-dot { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(46,145,94,0.45); background: rgba(46,145,94,0.15); }
+    .brand-name { font-size: 16px; font-weight: 700; color: var(--brand-green); }
+
+    .toggle { display: flex; gap: 4px; padding: 4px; border-radius: 999px; border: 1px solid rgba(43,38,35,0.12); background: rgba(255,255,255,0.55); }
+    .toggle button { border: 0; background: transparent; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 999px; color: rgba(43,38,35,0.7); cursor: pointer; }
+    .toggle button.active { background: rgba(233,179,81,0.28); color: var(--ink); }
+
+    .cta { position: relative; height: 34px; padding: 0 18px; border-radius: 999px; border: 1px solid rgba(46,145,94,0.45); background: linear-gradient(180deg, var(--brand-green), var(--brand-green-deep)); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.2px; text-transform: uppercase; box-shadow: 0 14px 28px rgba(46,145,94,0.2); cursor: pointer; }
+    .cta .dot { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; background: rgba(255,247,238,0.7); box-shadow: 0 0 0 2px rgba(255,247,238,0.35); }
+
+    .hero { padding: 48px 24px 32px; text-align: center; }
+    .hero h1 { font-size: 36px; font-weight: 700; line-height: 1.2; letter-spacing: -0.4px; }
+    .hero .sub { margin-top: 16px; font-size: 23px; font-weight: 300; line-height: 1.5; letter-spacing: -0.3px; }
+    .hero .support { margin-top: 12px; font-size: 13px; color: rgba(43,38,35,0.7); }
+
+    .green-story { background: var(--brand-green); color: #fff; position: relative; }
+    .green-inner { min-height: 220vh; padding: 48px 24px 64px; }
+    .story-sticky { position: sticky; top: 96px; display: flex; flex-direction: column; align-items: center; gap: 32px; }
+    .story-text { position: relative; min-height: 120px; width: 100%; text-align: center; }
+    .story-text > div { position: absolute; left: 0; right: 0; }
+    .story-text h2 { font-size: 24px; font-weight: 600; line-height: 1.3; }
+    .story-text p { margin-top: 12px; font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.6; }
+
+    .phone-wrap { position: relative; width: 260px; height: 470px; }
+    .phone-screen { position: absolute; inset: 0; border-radius: 36px; overflow: hidden; background: transparent; display: flex; align-items: center; justify-content: center; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.6); }
+    .phone-screen img { width: 100%; height: 100%; object-fit: cover; }
+
+    .overlay { position: absolute; background: #fff; border-radius: 20px; padding: 18px 20px; font-size: 12px; color: var(--ink); box-shadow: 0 22px 48px rgba(0,0,0,0.25); opacity: 0; transform: translateY(10px); transition: opacity 400ms ease, transform 400ms ease; }
+    .overlay.show { opacity: 1; transform: translateY(0); }
+    .overlay.doc { border-radius: 10px; padding: 0; overflow: hidden; }
+
+    .timeline-stack { position: absolute; left: 50%; top: 90px; transform: translate(-50%, 10px); opacity: 0; transition: opacity 400ms ease, transform 400ms ease; width: 280px; max-width: calc(100vw - 80px); }
+    .timeline-stack.show { opacity: 1; transform: translateY(0); }
+    .timeline-line { position: absolute; left: 10px; top: 20px; bottom: 24px; width: 2px; background: #ffffff; border-radius: 999px; }
+    .timeline-dot { position: absolute; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.18); }
+    .timeline-card { position: relative; width: 100%; background: #fff; border-radius: 22px; padding: 18px 20px 18px 30px; box-shadow: 0 22px 48px rgba(0,0,0,0.25); }
+    .timeline-card + .timeline-card { margin-top: 20px; }
+    .timeline-meta { font-size: 16px; font-weight: 500; color: #111; margin-bottom: 10px; }
+    .timeline-title { font-size: 26px; font-weight: 800; margin-bottom: 12px; color: #111; }
+    .timeline-body { font-size: 16px; line-height: 1.7; color: #111; }
+    .timeline-audio { margin-top: 16px; height: 34px; border-radius: 999px; background: #f4f4f4; border: 1px solid rgba(43,38,35,0.12); display: flex; align-items: center; gap: 10px; padding: 0 12px; font-size: 11px; color: rgba(43,38,35,0.7); }
+    .timeline-audio .mic { width: 22px; height: 22px; border-radius: 50%; background: #1f8f5b; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+    .timeline-audio .bar { flex: 1; height: 8px; border-radius: 999px; background: linear-gradient(90deg, #18a06a 0%, #18a06a 55%, #cfd7d2 55%, #cfd7d2 100%); }
+
+    .story-cta { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .story-cta button { position: relative; height: 34px; padding: 0 24px; border-radius: 999px; border: 1px solid rgba(183,106,74,0.45); background: linear-gradient(180deg, var(--action-top), var(--action-bottom)); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: 0.2px; text-transform: uppercase; box-shadow: 0 14px 28px rgba(183,106,74,0.2); cursor: pointer; }
+    .story-cta button .dot { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; background: rgba(255,247,238,0.7); box-shadow: 0 0 0 2px rgba(255,247,238,0.35); }
+    .story-cta .note { font-size: 13px; color: rgba(255,255,255,0.8); }
+
+    .cards { padding: 48px 24px; display: flex; flex-direction: column; gap: 24px; }
+    .card { position: relative; border: 1px solid rgba(43,38,35,0.14); border-radius: 12px; padding: 20px; background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65)); box-shadow: var(--shadow-card); overflow: hidden; }
+    .card::before { content: ""; position: absolute; width: 112px; height: 112px; border-radius: 50%; background: rgba(233,179,81,0.18); left: -40px; top: -32px; }
+    .card::after { content: ""; position: absolute; width: 64px; height: 64px; border-radius: 12px; background: rgba(46,145,94,0.12); right: -32px; top: 40px; }
+    .card .thumb { height: 112px; width: 100%; border-radius: 10px; border: 1px solid rgba(43,38,35,0.1); background: rgba(255,255,255,0.7); margin-bottom: 16px; }
+    .card h3 { font-size: 22px; font-weight: 700; line-height: 1.4; }
+    .card p { margin-top: 12px; font-size: 16px; line-height: 1.5; color: rgba(43,38,35,0.85); }
+
+    .how { padding: 48px 24px; }
+    .how h2 { text-align: center; font-size: 25px; font-weight: 700; line-height: 1.3; letter-spacing: -0.4px; }
+    .how-steps { margin-top: 32px; display: flex; flex-direction: column; gap: 28px; }
+    .how-step { display: flex; gap: 16px; }
+    .how-step .num { width: 41px; height: 41px; border-radius: 5px; border: 1px solid rgba(46,145,94,0.6); background: rgba(46,145,94,0.2); color: #146b3e; font-size: 20px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .how-step h3 { font-size: 20px; font-weight: 700; line-height: 1.4; }
+    .how-step p { margin-top: 8px; font-size: 16px; line-height: 1.5; color: rgba(43,38,35,0.85); }
+
+    .summary { padding: 48px 24px; text-align: center; }
+    .summary h2 { font-size: 25px; font-weight: 700; line-height: 1.3; }
+    .summary .subtitle { margin-top: 8px; font-size: 16px; color: rgba(43,38,35,0.8); }
+    .summary-card { margin-top: 24px; border-radius: 12px; border: 1px solid rgba(43,38,35,0.14); background: rgba(255,255,255,0.8); box-shadow: var(--shadow-card); overflow: hidden; text-align: left; }
+    .summary-preview { height: 210px; background: rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(43,38,35,0.6); }
+    .summary-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .summary-body { padding: 20px; border-top: 1px solid rgba(43,38,35,0.08); }
+    .summary-body h4 { font-size: 13px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(43,38,35,0.7); margin-bottom: 12px; }
+    .summary-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; font-size: 13px; color: rgba(43,38,35,0.75); }
+    .summary-fields div { padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(46,145,94,0.2); background: rgba(46,145,94,0.08); }
+
+    .ready { padding: 48px 24px; text-align: center; }
+    .ready h2 { font-size: 25px; font-weight: 700; line-height: 1.3; }
+    .ready p { margin-top: 12px; font-size: 16px; color: rgba(43,38,35,0.8); line-height: 1.5; }
+
+    .trust { padding: 32px 24px 64px; text-align: center; }
+    .trust h2 { font-size: 25px; font-weight: 700; line-height: 1.3; }
+    .trust .lines { margin-top: 16px; display: grid; gap: 12px; font-size: 16px; line-height: 1.7; color: rgba(43,38,35,0.85); }
+    .trust .logo { margin-top: 24px; display: flex; justify-content: center; align-items: center; gap: 8px; color: var(--brand-green); }
+    .trust .logo .dot { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(46,145,94,0.4); background: rgba(46,145,94,0.1); }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .hidden { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { transform: none; }
+      .green-inner { min-height: auto; }
+      .story-sticky { position: static; }
+      .overlay { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="page">
+    <header class="sticky-header" id="stickyHeader">
+      <div class="container header-inner">
+        <div class="brand">
+          <div class="brand-dot" aria-hidden="true"></div>
+          <span class="brand-name" data-i18n="header.brand">CareLog</span>
+        </div>
+        <div class="toggle" role="group" aria-label="Language toggle">
+          <button id="langEn" class="active" aria-pressed="true">EN</button>
+          <button id="langEs" aria-pressed="false">ES</button>
+        </div>
+        <button class="cta" data-i18n="header.cta" aria-label="Start">
+          Start
+          <span class="dot" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero reveal">
+        <h1 data-i18n="hero.title">Stop relying on memory for your health.</h1>
+        <p class="sub" data-i18n="hero.sub">Everything your doctor needs — remembered, organized, ready.</p>
+        <p class="support" data-i18n="hero.support">No app to download. Works in WhatsApp.</p>
+      </section>
+    </main>
+
+    <section class="green-story" id="greenStory">
+      <div class="container green-inner">
+        <div class="story-sticky">
+          <div class="story-text">
+            <div class="story-step" data-step="0">
+              <h2 data-i18n="greenStory.steps.0.title">Capture symptoms, changes, and questions in seconds in WhatsApp.</h2>
+              <p data-i18n="greenStory.steps.0.micro">Just send messages — text, notes, or voice.</p>
+            </div>
+            <div class="story-step hidden" data-step="1">
+              <h2 data-i18n="greenStory.steps.1.title">Builds a timeline automatically.</h2>
+              <p data-i18n="greenStory.steps.1.micro">You message. We organize everything over time.</p>
+            </div>
+            <div class="story-step hidden" data-step="2">
+              <h2 data-i18n="greenStory.steps.2.title">Generates a clean summary you can share at your next visit.</h2>
+              <p data-i18n="greenStory.steps.2.micro">Clear, structured, and easy for a doctor to review.</p>
+            </div>
+          </div>
+
+          <div class="phone-wrap">
+            <div class="phone-screen">
+              <img src="public/phone-chat.png" alt="Phone screenshot" onerror="this.remove(); this.parentElement.textContent='Screenshot Placeholder';" />
+            </div>
+
+            <div class="overlay" id="overlayBubble" style="left: -24px; top: 44px; width: 190px;">
+              "Headache since Monday" — note saved
+            </div>
+            <div class="timeline-stack" id="overlayTimelineStack">
+              <div class="timeline-line" aria-hidden="true"></div>
+              <div class="timeline-dot" style="top: 30px;" aria-hidden="true"></div>
+              <div class="timeline-dot" style="top: 198px;" aria-hidden="true"></div>
+              <div class="timeline-card">
+                <div class="timeline-meta">Today · 06:11 PM</div>
+                <div class="timeline-title">Sty in left aye</div>
+                <div class="timeline-body">Jeffrey has dolor de cabeza constante en la parte frontal. Desde hace dos días.</div>
+              </div>
+              <div class="timeline-card">
+                <div class="timeline-meta">Yesterday · 05:11 PM</div>
+                <div class="timeline-title">Back Pain</div>
+                <div class="timeline-body">Jeffrey had bad pain</div>
+                <div class="timeline-audio">
+                  <span class="mic">🎤</span>
+                  <span class="bar"></span>
+                  <span>0:12</span>
+                </div>
+              </div>
+            </div>
+            <div class="overlay doc" id="overlayDoc" style="left: -16px; top: 70px; width: 200px;">
+              <div style="height: 220px; background: white;">
+                <img src="public/doc-summary.png" alt="Doctor summary" onerror="this.remove(); this.parentElement.textContent='Summary Placeholder';" style="width:100%; height:100%; object-fit: cover;" />
+              </div>
+            </div>
+          </div>
+
+          <div class="story-cta">
+            <button data-i18n="greenStory.cta">
+              Start on WhatsApp
+              <span class="dot" aria-hidden="true"></span>
+            </button>
+            <p class="note" data-i18n="greenStory.note">It takes less than a minute.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="container">
+      <section class="cards">
+        <div class="card reveal">
+          <div class="thumb"></div>
+          <h3 data-i18n="benefits.cards.0.title">For you and your family</h3>
+          <p data-i18n="benefits.cards.0.body">Less “What did I forget?” More clarity for your next visit.</p>
+        </div>
+        <div class="card reveal">
+          <div class="thumb"></div>
+          <h3 data-i18n="benefits.cards.1.title">For your doctor</h3>
+          <p data-i18n="benefits.cards.1.body">Better history. Less back-and-forth. More time for real guidance.</p>
+        </div>
+      </section>
+
+      <section class="how">
+        <h2 class="reveal" data-i18n="howItWorks.title">How it works</h2>
+        <div class="how-steps">
+          <div class="how-step reveal">
+            <div class="num">1</div>
+            <div>
+              <h3 data-i18n="howItWorks.steps.0.title">Tell CareLog what’s happening</h3>
+              <p data-i18n="howItWorks.steps.0.sub">A quick note, a few texts, or a voice message — whenever it happens.</p>
+            </div>
+          </div>
+          <div class="how-step reveal">
+            <div class="num">2</div>
+            <div>
+              <h3 data-i18n="howItWorks.steps.1.title">CareLog organizes it over time</h3>
+              <p data-i18n="howItWorks.steps.1.sub">Symptoms, triggers, meds, questions — all in one place.</p>
+            </div>
+          </div>
+          <div class="how-step reveal">
+            <div class="num">3</div>
+            <div>
+              <h3 data-i18n="howItWorks.steps.2.title">Get a doctor-ready summary</h3>
+              <p data-i18n="howItWorks.steps.2.sub">Share it when you’re ready for your next visit.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <h2 class="reveal" data-i18n="doctorSummary.title">Doctor-ready summary</h2>
+        <p class="subtitle reveal" data-i18n="doctorSummary.subtitle">From WhatsApp messages to a clean document your doctor can review.</p>
+        <div class="summary-card reveal">
+          <div class="summary-preview">
+            <img src="public/doc-summary.png" alt="Doctor summary" onerror="this.remove(); this.parentElement.textContent='Summary Placeholder';" />
+          </div>
+          <div class="summary-body">
+            <h4 data-i18n="doctorSummary.exampleHeading">For your doctor summary</h4>
+            <div class="summary-fields">
+              <div data-i18n="doctorSummary.fields.0">Name</div>
+              <div data-i18n="doctorSummary.fields.1">Started</div>
+              <div data-i18n="doctorSummary.fields.2">Pattern</div>
+              <div data-i18n="doctorSummary.fields.3">What helps</div>
+              <div data-i18n="doctorSummary.fields.4">Meds tried</div>
+              <div data-i18n="doctorSummary.fields.5">Impact</div>
+              <div data-i18n="doctorSummary.fields.6">Questions</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ready">
+        <h2 class="reveal" data-i18n="ready.title">Ready to start?</h2>
+        <p class="reveal" data-i18n="ready.body">Send a quick message on WhatsApp. In under a minute, you’ll have a clearer starting point for your next visit.</p>
+        <div class="reveal" style="margin-top: 20px;">
+          <button class="story-cta" data-i18n="ready.cta">Start on WhatsApp</button>
+        </div>
+      </section>
+
+      <section class="trust">
+        <h2 class="reveal" data-i18n="trust.title">Trust & safety</h2>
+        <div class="lines reveal">
+          <p data-i18n="trust.body.0">CareLog is an AI health companion — not a clinic.</p>
+          <p data-i18n="trust.body.1">It does not diagnose or replace medical advice.</p>
+          <p data-i18n="trust.body.2">It helps you prepare by organizing what you share.</p>
+          <p data-i18n="trust.body.3">Not for emergencies. If symptoms are severe or sudden, seek immediate care.</p>
+          <p data-i18n="trust.body.4">You control what you share and when.</p>
+        </div>
+        <div class="logo reveal">
+          <div class="dot" aria-hidden="true"></div>
+          <span style="font-weight:700; font-size:16px;">CareLog</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const dictionary = {
+      en: {
+        header: { brand: "CareLog", cta: "Start" },
+        hero: {
+          title: "Stop relying on memory for your health.",
+          sub: "Everything your doctor needs — remembered, organized, ready.",
+          support: "No app to download. Works in WhatsApp."
+        },
+        greenStory: {
+          steps: [
+            { title: "Capture symptoms, changes, and questions in seconds in WhatsApp.", micro: "Just send messages — text, notes, or voice." },
+            { title: "Builds a timeline automatically.", micro: "You message. We organize everything over time." },
+            { title: "Generates a clean summary you can share at your next visit.", micro: "Clear, structured, and easy for a doctor to review." }
+          ],
+          cta: "Start on WhatsApp",
+          note: "It takes less than a minute."
+        },
+        benefits: {
+          cards: [
+            { title: "For you and your family", body: "Less “What did I forget?” More clarity for your next visit." },
+            { title: "For your doctor", body: "Better history. Less back-and-forth. More time for real guidance." }
+          ]
+        },
+        howItWorks: {
+          title: "How it works",
+          steps: [
+            { title: "Tell CareLog what’s happening", sub: "A quick note, a few texts, or a voice message — whenever it happens." },
+            { title: "CareLog organizes it over time", sub: "Symptoms, triggers, meds, questions — all in one place." },
+            { title: "Get a doctor-ready summary", sub: "Share it when you’re ready for your next visit." }
+          ]
+        },
+        doctorSummary: {
+          title: "Doctor-ready summary",
+          subtitle: "From WhatsApp messages to a clean document your doctor can review.",
+          exampleHeading: "For your doctor summary",
+          fields: ["Name", "Started", "Pattern", "What helps", "Meds tried", "Impact", "Questions"]
+        },
+        ready: {
+          title: "Ready to start?",
+          body: "Send a quick message on WhatsApp. In under a minute, you’ll have a clearer starting point for your next visit.",
+          cta: "Start on WhatsApp"
+        },
+        trust: {
+          title: "Trust & safety",
+          body: [
+            "CareLog is an AI health companion — not a clinic.",
+            "It does not diagnose or replace medical advice.",
+            "It helps you prepare by organizing what you share.",
+            "Not for emergencies. If symptoms are severe or sudden, seek immediate care.",
+            "You control what you share and when."
+          ]
+        }
+      },
+      es: {
+        header: { brand: "CareLog", cta: "Empezar" },
+        hero: {
+          title: "Deja de depender de tu memoria para tu salud.",
+          sub: "Todo lo que tu médico necesita — recordado, organizado, listo.",
+          support: "Sin app. Funciona por WhatsApp."
+        },
+        greenStory: {
+          steps: [
+            { title: "Registra síntomas, cambios y preguntas en segundos por WhatsApp.", micro: "Solo manda mensajes — texto, notas o audios." },
+            { title: "Crea una línea de tiempo automáticamente.", micro: "Tú escribes. Nosotros lo organizamos a lo largo del tiempo." },
+            { title: "Genera un resumen claro para compartir en tu próxima consulta.", micro: "Claro, estructurado y fácil de revisar por tu médico." }
+          ],
+          cta: "Empezar en WhatsApp",
+          note: "Toma menos de un minuto."
+        },
+        benefits: {
+          cards: [
+            { title: "Para ti y tu familia", body: "Menos “¿qué se me olvidó?” Más claridad para tu próxima consulta." },
+            { title: "Para tu médico", body: "Mejor historia clínica. Menos ida y vuelta. Más tiempo para orientar." }
+          ]
+        },
+        howItWorks: {
+          title: "Cómo funciona",
+          steps: [
+            { title: "Cuéntale a CareLog qué está pasando", sub: "Una nota, unos mensajes o un audio — cuando ocurra." },
+            { title: "CareLog lo organiza con el tiempo", sub: "Síntomas, detonantes, meds, preguntas — todo en un solo lugar." },
+            { title: "Obtén un resumen listo para tu consulta", sub: "Compártelo cuando estés listo para tu próxima visita." }
+          ]
+        },
+        doctorSummary: {
+          title: "Resumen listo para el doctor",
+          subtitle: "De mensajes en WhatsApp a un documento claro para revisar.",
+          exampleHeading: "Para tu resumen médico",
+          fields: ["Nombre", "Inicio", "Patrón", "Qué ayuda", "Medicación probada", "Impacto", "Preguntas"]
+        },
+        ready: {
+          title: "¿Listo para empezar?",
+          body: "Manda un mensaje por WhatsApp. En menos de un minuto tendrás un punto de partida más claro para tu próxima consulta.",
+          cta: "Empezar en WhatsApp"
+        },
+        trust: {
+          title: "Confianza y seguridad",
+          body: [
+            "CareLog es un acompañante de salud con IA — no es una clínica.",
+            "No diagnostica ni reemplaza el consejo médico.",
+            "Te ayuda a prepararte organizando lo que compartes.",
+            "No es para emergencias. Si los síntomas son graves o repentinos, busca atención inmediata.",
+            "Tú decides qué compartir y cuándo."
+          ]
+        }
+      }
+    };
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const updateText = (lang) => {
+      const dict = dictionary[lang];
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const path = el.getAttribute("data-i18n").split(".");
+        let value = dict;
+        for (const key of path) value = value?.[key];
+        if (value) el.textContent = value;
+      });
+    };
+
+    const setLang = (lang) => {
+      localStorage.setItem("carelog-lang", lang);
+      document.getElementById("langEn").classList.toggle("active", lang === "en");
+      document.getElementById("langEs").classList.toggle("active", lang === "es");
+      document.getElementById("langEn").setAttribute("aria-pressed", lang === "en");
+      document.getElementById("langEs").setAttribute("aria-pressed", lang === "es");
+      updateText(lang);
+    };
+
+    const initial = localStorage.getItem("carelog-lang") || "en";
+    setLang(initial);
+
+    document.getElementById("langEn").addEventListener("click", () => setLang("en"));
+    document.getElementById("langEs").addEventListener("click", () => setLang("es"));
+
+    const header = document.getElementById("stickyHeader");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 24);
+    });
+
+    const revealEls = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+
+    if (!reduceMotion) {
+      const green = document.getElementById("greenStory");
+      const steps = document.querySelectorAll(".story-step");
+      const bubble = document.getElementById("overlayBubble");
+      const timelineStack = document.getElementById("overlayTimelineStack");
+      const doc = document.getElementById("overlayDoc");
+
+      const updateStory = () => {
+        const rect = green.getBoundingClientRect();
+        const total = rect.height - window.innerHeight;
+        const progress = Math.min(Math.max(-rect.top / total, 0), 1);
+
+        const stepIndex = progress < 0.33 ? 0 : progress < 0.66 ? 1 : 2;
+        steps.forEach((step, idx) => step.classList.toggle("hidden", idx !== stepIndex));
+
+        bubble.classList.toggle("show", progress >= 0.05 && progress <= 0.33);
+        timelineStack.classList.toggle("show", progress >= 0.36 && progress <= 0.66);
+        doc.classList.toggle("show", progress >= 0.7 && progress <= 0.95);
+      };
+
+      updateStory();
+      window.addEventListener("scroll", updateStory);
+    }
+  </script>
+</body>
+</html>
