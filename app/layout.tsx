@@ -17,7 +17,10 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "CareLog — Mobile Landing",
-  description: "CareLog mobile landing page"
+  description: "CareLog mobile landing page",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
