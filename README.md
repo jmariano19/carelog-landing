@@ -23,3 +23,4 @@ UI uses pixel-perfect referencing of these assets.
 - Mobile-first layout, optimized for ~420px width.
 - Language toggle persists via `localStorage`.
 - Motion respects `prefers-reduced-motion`.
+
