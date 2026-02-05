@@ -59,10 +59,15 @@ export default function Trust() {
             </p>
 
             {/* CTA Button with hover animation */}
-            <button className="relative h-[34px] w-[199px] rounded-full border border-[rgba(183,106,74,0.45)] bg-gradient-to-b from-[#c27353] to-[#a85e42] text-white text-[12px] font-semibold tracking-[0.2px] uppercase shadow-[0_14px_28px_rgba(183,106,74,0.2)] mb-16 transition-all duration-200 hover:scale-110 active:scale-105">
-                <span className="absolute left-[14px] top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[rgba(255,247,238,0.7)] shadow-[0_0_0_2px_rgba(255,247,238,0.35)]" />
+            <a
+                href={`https://wa.me/18627775277?text=${lang === 'en' ? 'Hello' : 'Hola'}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative h-[34px] w-[199px] rounded-full border border-[rgba(183,106,74,0.45)] bg-gradient-to-b from-[#c27353] to-[#a85e42] text-white text-[12px] font-semibold tracking-[0.2px] uppercase shadow-[0_14px_28px_rgba(183,106,74,0.2)] mb-16 transition-all duration-200 hover:scale-110 active:scale-105 flex items-center justify-center gap-2 no-underline"
+            >
+                <span className="w-2 h-2 rounded-full bg-[rgba(255,247,238,0.7)] shadow-[0_0_0_2px_rgba(255,247,238,0.35)]" />
                 {c.cta}
-            </button>
+            </a>
 
             {/* Trust & Safety Section */}
             <div className="pt-8 flex flex-col items-center">
