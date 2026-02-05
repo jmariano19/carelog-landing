@@ -3,10 +3,13 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { dictionary, LangKey } from './i18n';
 
+type Dictionary = typeof dictionary;
+type Translations = Dictionary[LangKey];
+
 type LanguageContextType = {
   lang: LangKey;
   setLang: (lang: LangKey) => void;
-  t: typeof dictionary.en;
+  t: Translations;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
