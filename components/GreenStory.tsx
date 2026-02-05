@@ -273,7 +273,7 @@ export default function GreenStory() {
         {/* Start CTA with hover animation */}
         <div className="mt-12 flex flex-col items-center gap-3">
           <a
-            href="https://wa.me/18627775277?text=Hola"
+            href={`https://wa.me/18627775277?text=${lang === 'en' ? 'Hello' : 'Hola'}`}
             target="_blank"
             rel="noopener noreferrer"
             className="relative h-[44px] w-[220px] rounded-full border border-[rgba(255,255,255,0.3)] bg-gradient-to-b from-[#fff8f0] to-[#f5ebe0] text-[#2e915e] text-[13px] font-semibold tracking-[0.3px] uppercase shadow-[0_4px_20px_rgba(255,248,240,0.4),0_8px_40px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.8)] transition-all duration-200 hover:scale-110 hover:shadow-[0_6px_28px_rgba(255,248,240,0.5),0_12px_50px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.9)] active:scale-105 flex items-center justify-center gap-2 no-underline"
