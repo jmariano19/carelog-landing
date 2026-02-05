@@ -43,7 +43,7 @@ export default function Hero() {
       {/* Privacy Banner */}
       <div className="w-full bg-[#f0ebe3] py-4">
         <div className="max-w-[420px] mx-auto px-6 flex items-center justify-center gap-3">
-          <img src="/lock.png" alt="Privacy" className="w-[24px] h-[24px] object-contain" />
+          <img src="/Lock.png" alt="Privacy" className="w-[24px] h-[24px] object-contain" />
           <p className="font-sans text-[14px] font-normal leading-[20px] text-[#2d2926]">
             {privacyText}
           </p>
