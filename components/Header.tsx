@@ -54,10 +54,15 @@ export default function Header() {
                     </div>
 
                     {/* CTA - dot and text centered together with hover animation */}
-                    <button className="h-[34px] px-4 rounded-full border border-[#2eab6b] bg-gradient-to-b from-[#2e915e] to-[#216e46] text-white text-[12px] font-semibold tracking-[0.2px] shadow-[0_14px_28px_rgba(46,145,94,0.2)] transition-all duration-200 hover:scale-110 active:scale-105 flex items-center justify-center gap-2">
+                    <a
+                        href="https://wa.me/18627775277?text=Hola"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-[34px] px-4 rounded-full border border-[#2eab6b] bg-gradient-to-b from-[#2e915e] to-[#216e46] text-white text-[12px] font-semibold tracking-[0.2px] shadow-[0_14px_28px_rgba(46,145,94,0.2)] transition-all duration-200 hover:scale-110 active:scale-105 flex items-center justify-center gap-2 no-underline"
+                    >
                         <span className="w-2 h-2 rounded-full bg-[rgba(255,247,238,0.7)] shadow-[0_0_0_2px_rgba(255,247,238,0.35)]" />
                         {t.header.cta}
-                    </button>
+                    </a>
                 </div>
             </div>
         </header>
