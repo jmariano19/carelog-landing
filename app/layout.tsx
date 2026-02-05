@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Lora, Outfit } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -14,6 +14,12 @@ const outfit = Outfit({
   variable: "--font-outfit",
   display: "swap"
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "CareLog — Mobile Landing",

@@ -39,10 +39,10 @@ export default function BenefitsCards() {
     const t = content[lang];
 
     return (
-        <section className="px-[17px] pt-12 pb-6 flex flex-col gap-6 max-w-[420px] mx-auto">
+        <section className="px-4 sm:px-[17px] pt-12 pb-6 flex flex-col gap-6 max-w-[420px] w-full mx-auto">
             {/* Card 1: For you and your family */}
             <div
-                className="relative rounded-[10px] overflow-hidden border border-[rgba(43,38,35,0.14)] shadow-[0_18px_20px_rgba(40,31,26,0.08)] h-[296px] card-hover"
+                className="relative rounded-[10px] overflow-hidden border border-[rgba(43,38,35,0.14)] shadow-[0_18px_20px_rgba(40,31,26,0.08)] min-h-[280px] sm:min-h-[296px] card-hover"
                 style={{
                     background: `
                         radial-gradient(ellipse 460px 370px at 40% -20%, rgba(233,179,81,0.18) 0%, rgba(233,179,81,0) 55%),
@@ -51,7 +51,7 @@ export default function BenefitsCards() {
                 }}
             >
                 {/* Image - woman with phone */}
-                <div className="absolute left-[-10px] bottom-0 h-[410px] w-[270px]">
+                <div className="absolute left-[-10px] bottom-0 h-[360px] sm:h-[410px] w-[220px] sm:w-[270px]">
                     <img
                         src="/woman-phone.png"
                         alt="Woman with phone"
@@ -60,11 +60,11 @@ export default function BenefitsCards() {
                 </div>
 
                 {/* Text Content */}
-                <div className="absolute right-[18px] top-[40px] w-[180px]">
-                    <h3 className="font-serif text-[25px] font-bold leading-[30px] tracking-[-0.4px] text-[#2d2926] mb-3">
+                <div className="absolute right-3 sm:right-[18px] top-[32px] sm:top-[40px] w-[45%] sm:w-[180px]">
+                    <h3 className="font-serif text-[clamp(20px,6vw,25px)] font-bold leading-[1.2] tracking-[-0.4px] text-[#2d2926] mb-3">
                         {t.card1.title}
                     </h3>
-                    <p className="font-sans text-[17px] font-light leading-[24px] tracking-[-0.4px] text-[#2d2926]">
+                    <p className="font-sans text-[clamp(14px,4.2vw,17px)] font-light leading-[1.4] tracking-[-0.4px] text-[#2d2926]">
                         {t.card1.text1}{' '}
                         <span className="bg-[rgba(46,145,94,0.13)] px-1 rounded-[2px]">
                             {t.card1.highlight}
@@ -75,7 +75,7 @@ export default function BenefitsCards() {
             </div>
 
             {/* Card 2: For your doctor */}
-            <div className="relative rounded-[10px] overflow-hidden border border-[rgba(43,38,35,0.14)] shadow-[0_18px_20px_rgba(40,31,26,0.08)] h-[292px] card-hover">
+            <div className="relative rounded-[10px] overflow-hidden border border-[rgba(43,38,35,0.14)] shadow-[0_18px_20px_rgba(40,31,26,0.08)] min-h-[270px] sm:min-h-[292px] card-hover">
                 {/* Background Image */}
                 <img
                     src="/Doctor.png"
@@ -87,14 +87,14 @@ export default function BenefitsCards() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
                 {/* Text Content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-8">
                     {/* Notebook emoji */}
                     <span className="text-[32px] mb-3">🗒️</span>
 
-                    <h3 className="font-serif text-[25px] font-bold leading-[35px] tracking-[-0.4px] text-white mb-3">
+                    <h3 className="font-serif text-[clamp(20px,6vw,25px)] font-bold leading-[1.4] tracking-[-0.4px] text-white mb-3">
                         {t.card2.title}
                     </h3>
-                    <p className="font-sans text-[18px] font-light leading-[25px] tracking-[-0.4px] text-white max-w-[270px]">
+                    <p className="font-sans text-[clamp(15px,4.5vw,18px)] font-light leading-[1.4] tracking-[-0.4px] text-white max-w-[270px]">
                         {t.card2.text1}{' '}
                         <span className="font-bold">{t.card2.highlight}</span>{' '}
                         {t.card2.text2}

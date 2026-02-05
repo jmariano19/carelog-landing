@@ -43,7 +43,7 @@ export default function Trust() {
     const c = content[lang];
 
     return (
-        <section className="pt-8 pb-16 px-6 text-center max-w-[420px] mx-auto">
+        <section className="pt-8 pb-16 px-5 sm:px-6 text-center max-w-[420px] w-full mx-auto">
             {/* WhatsApp Icon */}
             <div className="flex justify-center mb-[15px]">
                 <img src="/WhatsApp.png" alt="WhatsApp" className="w-[44px] h-[43px] object-contain" />
@@ -54,7 +54,7 @@ export default function Trust() {
                 {c.ready}
             </h2>
 
-            <p className="font-sans text-[16px] font-normal leading-[20px] tracking-[-0.4px] text-black mb-8 w-[251px] mx-auto">
+            <p className="font-sans text-[clamp(14px,4vw,16px)] font-normal leading-[1.3] tracking-[-0.4px] text-black mb-8 w-full max-w-[280px] mx-auto">
                 {c.readyBody}
             </p>
 
@@ -76,7 +76,7 @@ export default function Trust() {
                 <h3 className="font-serif text-[25px] font-bold leading-[28px] text-black mb-6 text-center">
                     {c.trustTitle}
                 </h3>
-                <div className="w-[293px] text-center font-sans text-[16px] leading-[25px] text-black">
+                <div className="w-full max-w-[320px] text-center font-sans text-[clamp(14px,4vw,16px)] leading-[1.55] text-black">
                     <p className="mb-4">
                         <span className="font-bold">{c.trust1a}</span>{c.trust1b}<span className="font-bold">{c.trust1c}</span>
                     </p>

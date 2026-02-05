@@ -19,7 +19,7 @@ export default function Header() {
         <header
             className={`sticky top-0 z-50 transition-all duration-150 ease-in-out border-b border-[rgba(43,38,35,0.12)] backdrop-blur-[5px] bg-[rgba(247,242,233,0.86)] ${scrolled ? 'h-16 shadow-header' : 'h-[72px]'}`}
         >
-            <div className="max-w-[420px] mx-auto h-full px-[18px] flex items-center justify-between">
+            <div className="max-w-[420px] w-full mx-auto h-full px-4 sm:px-[18px] flex items-center justify-between">
                 {/* Brand Logo */}
                 <img
                     src="/carelog-logo.svg"
@@ -58,7 +58,7 @@ export default function Header() {
                         href={`https://wa.me/18627775277?text=${lang === 'en' ? 'Hello' : 'Hola'}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="h-[34px] px-4 rounded-full border border-[#2eab6b] bg-gradient-to-b from-[#2e915e] to-[#216e46] text-white text-[12px] font-semibold tracking-[0.2px] shadow-[0_14px_28px_rgba(46,145,94,0.2)] transition-all duration-200 hover:scale-110 active:scale-105 flex items-center justify-center gap-2 no-underline"
+                        className="h-[34px] px-3 sm:px-4 rounded-full border border-[#2eab6b] bg-gradient-to-b from-[#2e915e] to-[#216e46] text-white text-[11px] sm:text-[12px] font-semibold tracking-[0.2px] shadow-[0_14px_28px_rgba(46,145,94,0.2)] transition-all duration-200 hover:scale-110 active:scale-105 flex items-center justify-center gap-1.5 sm:gap-2 no-underline whitespace-nowrap"
                     >
                         <span className="w-2 h-2 rounded-full bg-[rgba(255,247,238,0.7)] shadow-[0_0_0_2px_rgba(255,247,238,0.35)]" />
                         {t.header.cta}

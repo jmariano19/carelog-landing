@@ -79,10 +79,10 @@ export default function GreenStory() {
 
   return (
     <section ref={containerRef} className="relative bg-[#2e915e] text-white h-[300vh]">
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center pt-[72px] pb-8 overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center pt-[72px] pb-8 overflow-hidden px-5">
 
         {/* Text Steps */}
-        <div className="relative w-full px-6 text-center h-[119px] mb-[31px] z-50">
+        <div className="relative w-full px-2 sm:px-6 text-center h-[119px] mb-[31px] z-50">
           <div className="relative w-full h-full flex flex-col items-center justify-center">
             {c.steps.map((s, i) => (
               <div
@@ -94,7 +94,7 @@ export default function GreenStory() {
                     : "opacity-0 translate-y-4"
                   }`}
               >
-                <h2 className="w-[288px] mx-auto font-serif text-[24px] font-semibold leading-[30px] text-white text-center">
+                <h2 className="w-full max-w-[288px] mx-auto font-serif text-[clamp(20px,6vw,24px)] font-semibold leading-[1.3] text-white text-center">
                   {s.title}
                 </h2>
                 {s.micro && (
@@ -112,14 +112,14 @@ export default function GreenStory() {
           <img
             src="/final-phone.png"
             alt="CareLog Chat"
-            className="w-[198px] h-auto object-contain"
+            className="w-[clamp(160px,50vw,198px)] h-auto object-contain"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
 
           {/* Overlay 1: Bubble - top left */}
           <motion.div
             style={{ opacity: bubbleOpacity, y: bubbleY }}
-            className="absolute -left-16 -top-8 px-5 py-4 bg-white rounded-[10px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-sm font-medium text-ink z-10 max-w-[180px]"
+            className="absolute -left-10 sm:-left-16 -top-6 sm:-top-8 px-3 sm:px-5 py-3 sm:py-4 bg-white rounded-[10px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-xs sm:text-sm font-medium text-ink z-10 max-w-[150px] sm:max-w-[180px]"
           >
             {c.bubble}
           </motion.div>
@@ -127,7 +127,7 @@ export default function GreenStory() {
           {/* Overlay 1b: Second Bubble - bottom right */}
           <motion.div
             style={{ opacity: bubbleOpacity, y: bubbleY }}
-            className="absolute -right-16 top-[180px] px-5 py-4 bg-white rounded-[10px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-sm font-medium text-ink z-10 max-w-[180px]"
+            className="absolute -right-10 sm:-right-16 top-[140px] sm:top-[180px] px-3 sm:px-5 py-3 sm:py-4 bg-white rounded-[10px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-xs sm:text-sm font-medium text-ink z-10 max-w-[150px] sm:max-w-[180px]"
           >
             {c.bubble2}
           </motion.div>
@@ -135,20 +135,20 @@ export default function GreenStory() {
           {/* Overlay 2: Timeline Stack */}
           <motion.div
             style={{ opacity: timelineOpacity, y: timelineY, x: "-50%" }}
-            className="absolute left-1/2 top-4 w-[340px] z-20"
+            className="absolute left-1/2 top-4 w-[calc(100vw-40px)] max-w-[340px] z-20"
           >
             {/* Timeline Line - connects the two cards on the left */}
             <div className="absolute left-[22px] top-[40px] bottom-[220px] w-[3px] bg-[#2e915e] rounded-full z-0" />
 
             {/* Card 1 */}
-            <div className="relative bg-white rounded-[20px] p-6 shadow-[0_4px_40px_rgba(0,0,0,0.25)] mb-3">
+            <div className="relative bg-white rounded-[16px] sm:rounded-[20px] p-4 sm:p-6 shadow-[0_4px_40px_rgba(0,0,0,0.25)] mb-3">
               {/* Date with green dot */}
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-[14px] h-[14px] rounded-full bg-[#2e915e] flex-shrink-0" />
                 <div className="text-[16px] font-normal text-black/70">{lang === 'en' ? 'Today · 06:11 PM' : 'Hoy · 06:11 PM'}</div>
               </div>
-              <div className="text-[28px] font-bold text-black mb-2 font-serif leading-tight">{lang === 'en' ? 'Sty in left eye' : 'Orzuelo en ojo izquierdo'}</div>
-              <div className="text-[18px] leading-[26px] text-black font-normal font-sans">
+              <div className="text-[22px] sm:text-[28px] font-bold text-black mb-2 font-serif leading-tight">{lang === 'en' ? 'Sty in left eye' : 'Orzuelo en ojo izquierdo'}</div>
+              <div className="text-[15px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-black font-normal font-sans">
                 {lang === 'en'
                   ? 'Jeffrey has constant frontal headache, for two days.'
                   : 'Jeffrey tiene dolor de cabeza constante en la parte frontal, desde hace dos días.'}
@@ -156,14 +156,14 @@ export default function GreenStory() {
             </div>
 
             {/* Card 2 */}
-            <div className="relative bg-white rounded-[20px] p-6 shadow-[0_4px_40px_rgba(0,0,0,0.25)]">
+            <div className="relative bg-white rounded-[16px] sm:rounded-[20px] p-4 sm:p-6 shadow-[0_4px_40px_rgba(0,0,0,0.25)]">
               {/* Date with green dot */}
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-[14px] h-[14px] rounded-full bg-[#2e915e] flex-shrink-0" />
                 <div className="text-[16px] font-normal text-black/70">{lang === 'en' ? 'Yesterday · 05:11 PM' : 'Ayer · 05:11 PM'}</div>
               </div>
-              <div className="text-[28px] font-bold text-black mb-2 font-serif leading-tight">{lang === 'en' ? 'Back Pain' : 'Dolor de Espalda'}</div>
-              <div className="text-[18px] leading-[26px] text-black font-normal font-sans mb-4">
+              <div className="text-[22px] sm:text-[28px] font-bold text-black mb-2 font-serif leading-tight">{lang === 'en' ? 'Back Pain' : 'Dolor de Espalda'}</div>
+              <div className="text-[15px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-black font-normal font-sans mb-4">
                 {lang === 'en' ? 'Jeffrey had bad pain' : 'Jeffrey tuvo dolor fuerte'}
               </div>
 
@@ -204,7 +204,7 @@ export default function GreenStory() {
           {/* Overlay 3: Doc Summary Card */}
           <motion.div
             style={{ opacity: docOpacity, y: docY, x: "-50%" }}
-            className="absolute left-1/2 top-0 w-[320px] z-30"
+            className="absolute left-1/2 top-0 w-[calc(100vw-48px)] max-w-[320px] z-30"
           >
             {/* Doctor Summary Card */}
             <div className="bg-white rounded-[16px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] p-5 text-left text-[11px]">

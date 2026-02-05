@@ -60,19 +60,19 @@ export default function DoctorSummary() {
 
     return (
         <section className="w-full bg-[#fbf3e9]">
-            <div className="px-6 py-12 flex flex-col items-center max-w-[420px] mx-auto">
+            <div className="px-5 sm:px-6 py-12 flex flex-col items-center max-w-[420px] w-full mx-auto">
             {/* Title and Subtitle */}
-            <div className="w-[297px] flex flex-col justify-center text-center mb-8">
-                <h2 className="font-serif text-[25px] font-bold leading-[43.2px] tracking-[-0.4px] text-[#2d2926]">
+            <div className="w-full max-w-[320px] flex flex-col justify-center text-center mb-8">
+                <h2 className="font-serif text-[clamp(22px,6vw,25px)] font-bold leading-[1.7] tracking-[-0.4px] text-[#2d2926]">
                     {c.title}
                 </h2>
-                <p className="font-sans text-[16px] font-normal leading-[25px] tracking-[-0.4px] text-[#2d2926]">
+                <p className="font-sans text-[clamp(14px,4vw,16px)] font-normal leading-[1.55] tracking-[-0.4px] text-[#2d2926]">
                     {c.subtitle}
                 </p>
             </div>
 
             {/* Summary Card */}
-            <div className="w-full max-w-[360px] bg-white rounded-[16px] shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-6 border-l-[4px] border-l-[#2e915e] card-hover">
+            <div className="w-full max-w-[360px] bg-white rounded-[16px] shadow-[0_4px_30px_rgba(0,0,0,0.1)] p-5 sm:p-6 border-l-[4px] border-l-[#2e915e] card-hover">
                 {/* Reason for Consultation */}
                 <div className="flex items-center gap-2 mb-2">
                     <span className="text-[16px]">🩺</span>
@@ -94,19 +94,19 @@ export default function DoctorSummary() {
 
                 <div className="space-y-1 mb-2 text-[14px]">
                     <div className="flex">
-                        <span className="text-[#6b7280] w-[100px]">{c.onset}</span>
+                        <span className="text-[#6b7280] w-[90px] sm:w-[100px] flex-shrink-0">{c.onset}</span>
                         <span className="text-[#2d2926] font-medium">{c.onsetValue}</span>
                     </div>
                     <div className="flex">
-                        <span className="text-[#6b7280] w-[100px]">{c.location}</span>
+                        <span className="text-[#6b7280] w-[90px] sm:w-[100px] flex-shrink-0">{c.location}</span>
                         <span className="text-[#2d2926] font-medium">{c.locationValue}</span>
                     </div>
                     <div className="flex">
-                        <span className="text-[#6b7280] w-[100px]">{c.character}</span>
+                        <span className="text-[#6b7280] w-[90px] sm:w-[100px] flex-shrink-0">{c.character}</span>
                         <span className="text-[#2d2926] font-medium">{c.characterValue}</span>
                     </div>
                     <div className="flex">
-                        <span className="text-[#6b7280] w-[100px]">{c.course}</span>
+                        <span className="text-[#6b7280] w-[90px] sm:w-[100px] flex-shrink-0">{c.course}</span>
                         <span className="text-[#2d2926] font-medium">{c.courseValue}</span>
                     </div>
                 </div>
