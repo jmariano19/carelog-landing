@@ -213,8 +213,35 @@ npm start
 
 ---
 
-## GitHub Push Access (for Claude)
+## Auto-Deploy Pipeline (GitHub → Easypanel)
 
+### How It Works
+1. Code is pushed to `main` branch on GitHub
+2. GitHub Actions workflow (`.github/workflows/deploy.yml`) runs automatically
+3. The workflow calls the Easypanel deploy webhook (stored as a GitHub secret)
+4. Easypanel pulls the latest code and rebuilds the Docker container
+
+### GitHub Actions Setup
+- **Workflow file:** `.github/workflows/deploy.yml`
+- **Trigger:** Push to `main` branch
+- **GitHub Secret:** `EASYPANEL_DEPLOY_WEBHOOK` — contains the Easypanel deploy URL
+- **Repository:** https://github.com/jmariano19/carelog-landing
+
+### Deploy Process (for Claude)
+To deploy changes, simply commit and push to `main`:
+```bash
+git add <files>
+git commit -m "Description of changes"
+git push origin main
+```
+The deploy happens automatically — no manual steps needed.
+
+### GitHub CLI Access
+- `gh` CLI is installed via Homebrew at `/opt/homebrew/bin/gh`
+- Authenticated as **jmariano19** via `gh auth login`
+- If `gh` is not in PATH, use full path: `/opt/homebrew/bin/gh`
+
+### GitHub Push Access (for Claude)
 At the start of each session, configure git to push directly:
 
 ```bash
@@ -226,4 +253,4 @@ The token is stored in `.github-token` (gitignored, never committed). After conf
 
 ---
 
-*Last updated: February 6, 2026*
+*Last updated: February 7, 2026*
