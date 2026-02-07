@@ -211,4 +211,19 @@ npm start
 
 ---
 
-*Last updated: February 5, 2026*
+---
+
+## GitHub Push Access (for Claude)
+
+At the start of each session, configure git to push directly:
+
+```bash
+TOKEN=$(cat .github-token)
+git remote set-url origin https://jmariano19:${TOKEN}@github.com/jmariano19/carelog-landing.git
+```
+
+The token is stored in `.github-token` (gitignored, never committed). After configuring, Claude can push and deploy directly.
+
+---
+
+*Last updated: February 6, 2026*
