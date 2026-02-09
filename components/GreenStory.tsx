@@ -112,14 +112,14 @@ export default function GreenStory() {
           <img
             src="/final-phone.png"
             alt="CareLog Chat"
-            className="w-[clamp(160px,50vw,198px)] h-auto object-contain"
+            className="w-[clamp(300px,80vw,498px)] h-auto object-contain"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
 
           {/* Overlay 1: Bubble - top left */}
           <motion.div
             style={{ opacity: bubbleOpacity, y: bubbleY }}
-            className="absolute -left-10 sm:-left-16 -top-6 sm:-top-8 px-3 sm:px-5 py-3 sm:py-4 bg-white rounded-[10px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-xs sm:text-sm font-medium text-ink z-10 max-w-[150px] sm:max-w-[180px]"
+            className="absolute left-4 sm:left-2 -top-4 sm:-top-6 px-4 sm:px-6 py-4 sm:py-5 bg-white rounded-[12px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-sm sm:text-base font-medium text-ink z-10 max-w-[180px] sm:max-w-[220px]"
           >
             {c.bubble}
           </motion.div>
@@ -127,7 +127,7 @@ export default function GreenStory() {
           {/* Overlay 1b: Second Bubble - bottom right */}
           <motion.div
             style={{ opacity: bubbleOpacity, y: bubbleY }}
-            className="absolute -right-10 sm:-right-16 top-[140px] sm:top-[180px] px-3 sm:px-5 py-3 sm:py-4 bg-white rounded-[10px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-xs sm:text-sm font-medium text-ink z-10 max-w-[150px] sm:max-w-[180px]"
+            className="absolute right-4 sm:right-2 top-[60%] px-4 sm:px-6 py-4 sm:py-5 bg-white rounded-[12px] shadow-[0_4px_40px_rgba(0,0,0,0.25)] text-sm sm:text-base font-medium text-ink z-10 max-w-[180px] sm:max-w-[220px]"
           >
             {c.bubble2}
           </motion.div>
