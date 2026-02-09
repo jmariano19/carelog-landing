@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { dictionary, LangKey } from './i18n';
 
 type Dictionary = typeof dictionary;
@@ -14,8 +14,17 @@ type LanguageContextType = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+function getInitialLang(): LangKey {
+  if (typeof window !== 'undefined') {
+    const params = new URLSearchParams(window.location.search);
+    const urlLang = params.get('lang');
+    if (urlLang === 'es' || urlLang === 'en') return urlLang;
+  }
+  return 'en';
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<LangKey>('en');
+  const [lang, setLang] = useState<LangKey>(getInitialLang);
 
   const t = dictionary[lang];
 

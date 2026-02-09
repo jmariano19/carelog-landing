@@ -38,7 +38,7 @@ export default function GreenStory() {
           micro: ""
         },
         {
-          title: "Builds a timeline automatically",
+          title: "Nothing gets lost. Your health story stays intact.",
           micro: "(just message on WhatsApp, we organize everything.)"
         },
         {
@@ -112,7 +112,7 @@ export default function GreenStory() {
           <img
             src="/final-phone.png"
             alt="CareLog Chat"
-            className="w-[clamp(160px,50vw,198px)] h-auto object-contain"
+            className="w-[clamp(400px,80vw,480px)] h-auto object-contain"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
 
@@ -150,8 +150,8 @@ export default function GreenStory() {
               <div className="text-[22px] sm:text-[28px] font-bold text-black mb-2 font-serif leading-tight">{lang === 'en' ? 'Sty in left eye' : 'Orzuelo en ojo izquierdo'}</div>
               <div className="text-[15px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-black font-normal font-sans">
                 {lang === 'en'
-                  ? 'Jeffrey has constant frontal headache, for two days.'
-                  : 'Jeffrey tiene dolor de cabeza constante en la parte frontal, desde hace dos días.'}
+                  ? 'My left eye hurts and I\'ve had a headache for a couple of days.'
+                  : 'Me duele el ojo izquierdo y he tenido dolor de cabeza por un par de días.'}
               </div>
             </div>
 
@@ -164,7 +164,7 @@ export default function GreenStory() {
               </div>
               <div className="text-[22px] sm:text-[28px] font-bold text-black mb-2 font-serif leading-tight">{lang === 'en' ? 'Back Pain' : 'Dolor de Espalda'}</div>
               <div className="text-[15px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-black font-normal font-sans mb-4">
-                {lang === 'en' ? 'Jeffrey had bad pain' : 'Jeffrey tuvo dolor fuerte'}
+                {lang === 'en' ? 'My back pain has been pretty bad since yesterday.' : 'Mi dolor de espalda ha sido bastante fuerte desde ayer.'}
               </div>
 
               {/* Voice Message Player - WhatsApp style bubble */}
@@ -271,7 +271,7 @@ export default function GreenStory() {
         </div>
 
         {/* Start CTA with hover animation */}
-        <div className="mt-12 flex flex-col items-center gap-3">
+        <div className="mt-4 flex flex-col items-center gap-3">
           <a
             href={`https://wa.me/18627775277?text=${lang === 'en' ? 'Hello' : 'Hola'}`}
             target="_blank"
