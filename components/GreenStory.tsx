@@ -82,7 +82,7 @@ export default function GreenStory() {
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center pt-[72px] pb-8 overflow-hidden px-5">
 
         {/* Text Steps */}
-        <div className="relative w-full px-2 sm:px-6 text-center h-[119px] mb-[31px] z-50">
+        <div className="relative w-full px-2 sm:px-6 text-center h-[160px] mb-[16px] z-50">
           <div className="relative w-full h-full flex flex-col items-center justify-center">
             {c.steps.map((s, i) => (
               <div

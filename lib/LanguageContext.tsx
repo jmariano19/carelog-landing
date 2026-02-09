@@ -24,7 +24,14 @@ function getInitialLang(): LangKey {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<LangKey>(getInitialLang);
+  const [lang, setLangState] = useState<LangKey>(getInitialLang);
+
+  const setLang = (newLang: LangKey) => {
+    setLangState(newLang);
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', newLang);
+    window.history.replaceState({}, '', url.toString());
+  };
 
   const t = dictionary[lang];
 
