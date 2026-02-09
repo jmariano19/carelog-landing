@@ -82,7 +82,7 @@ export default function GreenStory() {
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center pt-[72px] pb-8 overflow-hidden px-5">
 
         {/* Text Steps */}
-        <div className="relative w-full px-2 sm:px-6 text-center h-[160px] mb-[16px] z-50">
+        <div className="relative w-full px-2 sm:px-6 text-center h-[119px] mb-[31px] z-50">
           <div className="relative w-full h-full flex flex-col items-center justify-center">
             {c.steps.map((s, i) => (
               <div
@@ -112,7 +112,7 @@ export default function GreenStory() {
           <img
             src="/final-phone.png"
             alt="CareLog Chat"
-            className="w-[clamp(400px,80vw,480px)] h-auto object-contain"
+            className="w-[clamp(160px,50vw,198px)] h-auto object-contain"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
 
@@ -271,7 +271,7 @@ export default function GreenStory() {
         </div>
 
         {/* Start CTA with hover animation */}
-        <div className="mt-4 flex flex-col items-center gap-3">
+        <div className="mt-12 flex flex-col items-center gap-3">
           <a
             href={`https://wa.me/18627775277?text=${lang === 'en' ? 'Hello' : 'Hola'}`}
             target="_blank"
